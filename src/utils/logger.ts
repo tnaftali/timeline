@@ -1,13 +1,16 @@
 export class Logger {
-    public static info(message: string, className: string): void {
-        // tslint:disable-next-line:no-console
-        console.log(`${Date().toLocaleString()} - ${className} - ${message}`);
+    private className: string;
+
+    constructor(className: string) {
+        this.className = className;
     }
 
-    public static error(errorMessage: string, error?: object): void {
-        const message = `${Date().toLocaleString()} - Error: ${errorMessage}
-        ${error !== undefined ? " - " + error : ""}`;
-        // tslint:disable-next-line:no-console
+    public info(message: string): void {
+        console.log(`${Date().toLocaleString()} - ${this.className} - ${message}`);
+    }
+
+    public error(errorMessage: string, error?: object): void {
+        const message = `${Date().toLocaleString()} - ${this.className} - Error: ${errorMessage} ${error !== undefined ? " - " + error : ""}`;
         console.log(message);
     }
 }

@@ -1,9 +1,10 @@
 import request from "request";
 import { Logger } from "./logger";
+import { LoggerFactory } from "./logger-factory";
 
 export abstract class HttpUtils {
     public static doGet(url: string): Promise<string> {
-        Logger.info(`Executing GET request to ${url}`, HttpUtils.name);
+        this.logger.info(`Executing GET request to ${url}`);
 
         return new Promise((resolve, reject) => {
             request(url, (error, response, body) => {
@@ -17,4 +18,6 @@ export abstract class HttpUtils {
             });
         });
     }
+
+    private static readonly logger: Logger = LoggerFactory.create(HttpUtils.name);
 }

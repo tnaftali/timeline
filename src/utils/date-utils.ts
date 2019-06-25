@@ -1,22 +1,13 @@
 import moment from "moment";
 
 export abstract class DateUtils {
-    public static getOneWeekPeriod(): Date[] {
-        return this.getPeriod(1, "weeks");
+    public static getTenDaysPeriod(): { from: string, to: string } {
+        return this.getPeriod(10, "days");
     }
 
-    public static getOneMonthPeriod(): Date[] {
-        return this.getPeriod(1, "months");
-    }
+    private static getPeriod(subtractCount: any, subtractValue: string): { from: string, to: string } {
+        const pastDate = moment().subtract(subtractCount, subtractValue).format("YYYY-MM-DD");
 
-    public static getOneYearPeriod(): Date[] {
-        return this.getPeriod(1, "years");
-    }
-
-    private static getPeriod(subtractCount: any, subtractValue: string): Date[] {
-        const pastDate = moment().subtract(subtractCount, subtractValue).toDate();
-        pastDate.setUTCHours(0, 0, 0, 0);
-
-        return [pastDate, moment().toDate()];
+        return { from: pastDate, to: moment().format("YYYY-MM-DD") };
     }
 }

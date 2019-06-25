@@ -8,7 +8,9 @@
         "arrow-parens": [true],
         "radix": false,
         "ban-types": false,
-        "no-var-requires": false
+        "no-var-requires": false,
+        "no-console": false,
+        "max-line-length": false
     },
     "rulesDirectory": []
 }
