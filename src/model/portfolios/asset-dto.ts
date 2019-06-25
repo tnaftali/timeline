@@ -1,9 +1,9 @@
 export interface IAssetDto {
     symbol: string;
-    percentage: Number;
+    percentage: number;
 }
 
 export class AssetDto implements IAssetDto {
     public symbol: string;
-    public percentage: Number;
+    public percentage: number;
 }

@@ -6,9 +6,19 @@ export class WorldTradingDataRequestBuilder {
     private requestUrl: string;
 
     constructor() {
-        const dates = DateUtils.getTenDaysPeriod();
+        this.requestUrl = `${WORLD_TRADING_DATA_URL}${HISTORY_ENDPOINT}?api_token=${API_KEY}`.trim();
+    }
 
-        this.requestUrl = `${WORLD_TRADING_DATA_URL}${HISTORY_ENDPOINT}?api_token=${API_KEY}&date_from=${dates.from}&date_to=${dates.to}&sort=newest`.trim();
+    public setSort(sort: string) {
+        this.requestUrl += `&sort=${sort}`;
+
+        return this;
+    }
+
+    public setDates(dateFrom: string, dateTo: string) {
+        this.requestUrl += `&date_from=${dateFrom}&date_to=${dateTo}`;
+
+        return this;
     }
 
     public setSymbol(symbol: string) {

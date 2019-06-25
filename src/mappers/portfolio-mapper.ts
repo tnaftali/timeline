@@ -9,8 +9,8 @@ export abstract class PortfolioMapper {
         this.logger.info("Mapping request to portfolio");
 
         const portfolioRequestDto = new PortfolioRequestDto();
-        portfolioRequestDto.startDate = new Date(params.start_date);
-        portfolioRequestDto.initialBalance = +params.initial_balance;
+        portfolioRequestDto.start_date = new Date(params.start_date);
+        portfolioRequestDto.initial_balance = +params.initial_balance;
 
         const assets: IAssetDto[] = [];
         const allocationMap = params.allocation.split(";");

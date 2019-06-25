@@ -1,13 +1,13 @@
 import { IAssetDto } from "./asset-dto";
 
 export interface IPortfolioRequestDto {
-    startDate: Date;
-    initialBalance: Number;
+    start_date: Date;
+    initial_balance: number;
     allocation: IAssetDto[];
 }
 
 export class PortfolioRequestDto implements IPortfolioRequestDto {
-    public startDate: Date;
-    public initialBalance: Number;
+    public start_date: Date;
+    public initial_balance: number;
     public allocation: IAssetDto[];
 }

@@ -10,7 +10,12 @@
         "ban-types": false,
         "no-var-requires": false,
         "no-console": false,
-        "max-line-length": false
+        "max-line-length": false,
+        "variable-name": {
+            "options": [
+                "allow-snake-case"
+            ]
+        }
     },
     "rulesDirectory": []
 }
