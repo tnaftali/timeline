@@ -25,10 +25,6 @@ export class PortfolioService {
             this.logger.error(this.ERROR);
         }
 
-        console.log(currentValues);
-
-        // MathUtils.getEarnings(portfolioRequestDto, currentValues);
-
-        return currentValues;
+        return MathUtils.getEarnings(portfolioRequestDto, currentValues);
     }
 }
