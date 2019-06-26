@@ -1,19 +1,21 @@
+import { MESSAGES } from "../constants";
 import { AssetDto, IAssetDto } from "../model/portfolios/asset-dto";
 import { IPortfolioRequestDto, PortfolioRequestDto } from "../model/portfolios/portfolio-request-dto";
 import { Logger } from "../utils/logger";
 import { LoggerFactory } from "../utils/logger-factory";
 
-export abstract class PortfolioMapper {
+export class PortfolioMapper {
+    private readonly logger: Logger = LoggerFactory.create(PortfolioMapper.name);
 
-    public static mapRequest(params: any): IPortfolioRequestDto {
-        this.logger.info("Mapping request to portfolio");
+    public mapRequest(params: any): IPortfolioRequestDto {
+        this.logger.info(MESSAGES.MAPPING_REQUEST);
 
         const portfolioRequestDto = new PortfolioRequestDto();
         portfolioRequestDto.start_date = new Date(params.start_date);
         portfolioRequestDto.initial_balance = +params.initial_balance;
 
         const assets: IAssetDto[] = [];
-        const allocationMap = params.allocation.split(";");
+        const allocationMap = params.allocation.trim().split(";");
         allocationMap.forEach((asset: string) => {
             const assetDto = new AssetDto();
             assetDto.symbol = asset.split(":")[0];
@@ -24,5 +26,4 @@ export abstract class PortfolioMapper {
 
         return portfolioRequestDto;
     }
-    private static readonly logger: Logger = LoggerFactory.create(PortfolioMapper.name);
 }

@@ -1,18 +1,15 @@
 import { IAssetResponseDto } from "./asset-response-dto";
 
 export interface IPortfolioResponseDto {
-    start_date: Date;
-    end_date: Date;
-    initial_balance: number;
-    final_balance: number;
+    initial_date: string;
+    initial_balance: string;
+    final_balance: string;
     assets: IAssetResponseDto[];
 }
 
 export class PortfolioResponseDto implements IPortfolioResponseDto {
-    public start_date: Date;
-    public end_date: Date;
-    public earnings_percentage_sum: number;
-    public initial_balance: number;
-    public final_balance: number;
+    public initial_date: string;
+    public initial_balance: string;
+    public final_balance: string;
     public assets: IAssetResponseDto[];
 }
