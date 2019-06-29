@@ -7,7 +7,7 @@ export interface IPortfolioRequestDto {
 }
 
 export class PortfolioRequestDto implements IPortfolioRequestDto {
-    public start_date: Date;
-    public initial_balance: number;
-    public allocation: IAssetDto[];
+    start_date: Date;
+    initial_balance: number;
+    allocation: IAssetDto[];
 }

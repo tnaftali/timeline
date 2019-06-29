@@ -11,6 +11,7 @@
         "no-var-requires": false,
         "no-console": false,
         "max-line-length": false,
+        "member-access": false,
         "variable-name": {
             "options": [
                 "allow-snake-case"

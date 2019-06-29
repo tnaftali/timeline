@@ -1,11 +1,11 @@
 import promise from "bluebird";
 import { MESSAGES, Sort } from "../constants";
-import { IWorldTradingDataResponseDto } from "../model/integration/world-trading-data-response-dto";
+import { WorldTradingDataMapper } from "../mappers/world-trading-data-mapper";
+import { IWorldTradingDataResponseDto } from "../models/dto/world-trading-data-response-dto";
 import { DateUtils } from "../utils/date-utils";
 import { Logger } from "../utils/logger";
 import { LoggerFactory } from "../utils/logger-factory";
-import { WorldTradingDataMapper } from "./world-trading-data-mapper";
-import { WorldTradingDataRequestBuilder } from "./world-trading-data-request-builder";
+import { WorldTradingDataRequestBuilder } from "../utils/world-trading-data-request-builder";
 
 export class WorldTradingDataIntegrationService {
     private readonly logger: Logger = LoggerFactory.create(WorldTradingDataIntegrationService.name);

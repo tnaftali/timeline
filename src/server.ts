@@ -1,26 +1,15 @@
-// import cors from "cors";
-import dotenv from "dotenv";
-import express from "express";
-import * as portfolioRoutes from "./routes/portfolio-controller";
-import { Logger } from "./utils/logger";
-import { LoggerFactory } from "./utils/logger-factory";
+import { createServer } from "http";
+import { app } from "./app";
+import { sequelize } from "./sequelize";
 
-const logger: Logger = LoggerFactory.create("server.ts");
+const port = process.env.PORT || 3000;
 
-dotenv.config();
+(async () => {
+    await sequelize.sync({ force: true });
 
-const port = process.env.PORT;
-const app = express();
-
-// const corsOptions = {
-//     origin: FRONTEND_URL,
-//     optionsSuccessStatus: 200
-// };
-
-// app.use(cors(corsOptions));
-
-portfolioRoutes.register(app);
-
-app.listen(port, () => {
-    logger.info(`Server started at http://localhost:${port}`);
-});
+    createServer(app)
+        .listen(
+            port,
+            () => console.info(`Server running on port ${port}`)
+        );
+})();

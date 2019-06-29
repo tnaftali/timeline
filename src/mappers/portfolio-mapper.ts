@@ -1,6 +1,10 @@
 import { MESSAGES } from "../constants";
-import { AssetDto, IAssetDto } from "../model/portfolios/asset-dto";
-import { IPortfolioRequestDto, PortfolioRequestDto } from "../model/portfolios/portfolio-request-dto";
+import { Asset } from "../models/Asset";
+import { IAssetCreateDto } from "../models/dto/asset-create-dto";
+import { AssetDto, IAssetDto } from "../models/dto/asset-dto";
+import { IPortfolioRequestCreateDto } from "../models/dto/portfolio-request-create-dto";
+import { IPortfolioRequestDto, PortfolioRequestDto } from "../models/dto/portfolio-request-dto";
+import { Portfolio } from "../models/Portfolio";
 import { Logger } from "../utils/logger";
 import { LoggerFactory } from "../utils/logger-factory";
 
