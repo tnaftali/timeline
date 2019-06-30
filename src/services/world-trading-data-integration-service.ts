@@ -1,11 +1,12 @@
 import promise from "bluebird";
 import { MESSAGES, Sort } from "../constants";
+import { CommunicationError } from "../errors/communication-error";
+import { WorldTradingDataMapper } from "../mappers/world-trading-data-mapper";
 import { IWorldTradingDataResponseDto } from "../model/integration/world-trading-data-response-dto";
 import { DateUtils } from "../utils/date-utils";
 import { Logger } from "../utils/logger";
 import { LoggerFactory } from "../utils/logger-factory";
-import { WorldTradingDataMapper } from "./world-trading-data-mapper";
-import { WorldTradingDataRequestBuilder } from "./world-trading-data-request-builder";
+import { WorldTradingDataRequestBuilder } from "../utils/world-trading-data-request-builder";
 
 export class WorldTradingDataIntegrationService {
     private readonly logger: Logger = LoggerFactory.create(WorldTradingDataIntegrationService.name);
@@ -46,7 +47,7 @@ export class WorldTradingDataIntegrationService {
             return results;
         }).catch((err) => {
             this.logger.error(err);
-            throw new Error(MESSAGES.ERROR_GETTING_VALUES);
+            throw new CommunicationError(500, MESSAGES.ERROR_GETTING_VALUES);
         });
     }
 }

@@ -1,5 +1,5 @@
 import { API_KEY, HISTORY_ENDPOINT, WORLD_TRADING_DATA_URL } from "../constants";
-import { DateUtils } from "../utils/date-utils";
+import { DateUtils } from "./date-utils";
 
 export class WorldTradingDataRequestBuilder {
 

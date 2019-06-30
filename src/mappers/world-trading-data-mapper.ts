@@ -33,11 +33,11 @@ export class WorldTradingDataMapper {
         this.logger.info(MESSAGES.BUILDING_RESPONSE);
         const portfolioResponseDto = new PortfolioResponseDto();
         portfolioResponseDto.initial_date = moment(portfolioRequestDto.start_date).format(DATE_FORMAT);
-        portfolioResponseDto.initial_balance = `${portfolioRequestDto.initial_balance.toFixed(2)}`;
+        portfolioResponseDto.initial_balance = parseFloat(portfolioRequestDto.initial_balance.toFixed(2));
         portfolioResponseDto.assets = this.calculateForAssets(portfolioRequestDto, responsesDto);
-        portfolioResponseDto.final_balance = `${portfolioResponseDto.assets
-            .map((asset: IAssetResponseDto) => parseFloat(asset.final.balance))
-            .reduce((a: number, c: number) => a + c).toFixed(2)}`;
+        portfolioResponseDto.final_balance = parseFloat(portfolioResponseDto.assets
+            .map((asset: IAssetResponseDto) => asset.final.balance)
+            .reduce((a: number, c: number) => a + c).toFixed(2));
 
         return portfolioResponseDto;
     }
@@ -69,22 +69,22 @@ export class WorldTradingDataMapper {
         const assetResponseDto: IAssetResponseDto = new AssetResponseDto();
         assetResponseDto.symbol = symbol;
         const initial_percentage = this.getPercentage(portfolioRequestDto, symbol);
-        assetResponseDto.allocation = `${initial_percentage}%`;
+        assetResponseDto.allocation = initial_percentage;
 
-        const variationPercentage = MathUtils.getEarningsPercentage(newAsset.lastPrice.close, oldAsset.lastPrice.close);
-        assetResponseDto.variation = `${(variationPercentage * 100).toFixed(2)}%`;
+        const variationPercentage = MathUtils.getEarningsPercentage(parseFloat(newAsset.lastPrice.close), parseFloat(oldAsset.lastPrice.close));
+        assetResponseDto.variation = parseFloat((variationPercentage * 100).toFixed(2));
 
         assetResponseDto.initial.date = moment(oldAsset.lastPrice.date).format(DATE_FORMAT);
-        assetResponseDto.initial.value = `${oldAsset.lastPrice.close}`;
+        assetResponseDto.initial.price = parseFloat(oldAsset.lastPrice.close);
         const initialBalance = ((initial_percentage / 100) * portfolioRequestDto.initial_balance);
-        assetResponseDto.initial.balance = `${initialBalance.toFixed(2)}`;
+        assetResponseDto.initial.balance = parseFloat(initialBalance.toFixed(2));
 
         assetResponseDto.final.date = moment(newAsset.lastPrice.date).format(DATE_FORMAT);
-        assetResponseDto.final.value = `${newAsset.lastPrice.close}`;
+        assetResponseDto.final.price = parseFloat(newAsset.lastPrice.close);
         const finalBalance: number = MathUtils.getFinalBalance(initialBalance, variationPercentage);
-        assetResponseDto.final.balance = `${finalBalance.toFixed(2)}`;
+        assetResponseDto.final.balance = parseFloat(finalBalance.toFixed(2));
 
-        assetResponseDto.earnings = `${(finalBalance - initialBalance).toFixed(2)}`;
+        assetResponseDto.earnings = parseFloat((finalBalance - initialBalance).toFixed(2));
 
         return assetResponseDto;
     }

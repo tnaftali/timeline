@@ -1,11 +1,11 @@
 export interface IBalanceResponseDto {
     date: string;
-    value: string;
-    balance: string;
+    price: number;
+    balance: number;
 }
 
 export class BalanceResponseDto implements IBalanceResponseDto {
     public date: string;
-    public value: string;
-    public balance: string;
+    public price: number;
+    public balance: number;
 }

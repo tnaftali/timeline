@@ -1,12 +1,12 @@
 import { reject } from "bluebird";
-import { WorldTradingDataIntegrationService } from "../integration/world-trading-data-integration-service";
-import { WorldTradingDataMapper } from "../integration/world-trading-data-mapper";
 import { PortfolioMapper } from "../mappers/portfolio-mapper";
+import { WorldTradingDataMapper } from "../mappers/world-trading-data-mapper";
 import { IWorldTradingDataResponseDto } from "../model/integration/world-trading-data-response-dto";
 import { IPortfolioRequestDto } from "../model/portfolios/portfolio-request-dto";
 import { Logger } from "../utils/logger";
 import { LoggerFactory } from "../utils/logger-factory";
 import { PortfolioValidator } from "../validator/portfolio-validator";
+import { WorldTradingDataIntegrationService } from "./world-trading-data-integration-service";
 
 export class PortfolioService {
     private readonly logger: Logger = LoggerFactory.create(PortfolioService.name);

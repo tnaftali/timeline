@@ -2,18 +2,18 @@ import { BalanceResponseDto, IBalanceResponseDto } from "./balance-response-dto"
 
 export interface IAssetResponseDto {
     symbol: string;
-    allocation: string;
-    earnings: string;
-    variation: string;
+    allocation: number;
+    earnings: number;
+    variation: number;
     initial: IBalanceResponseDto;
     final: IBalanceResponseDto;
 }
 
 export class AssetResponseDto {
     public symbol: string;
-    public allocation: string;
-    public earnings: string;
-    public variation: string;
+    public allocation: number;
+    public earnings: number;
+    public variation: number;
     public initial: IBalanceResponseDto;
     public final: IBalanceResponseDto;
 
