@@ -41,13 +41,15 @@ export class WorldTradingDataIntegrationService {
         return promise.map(urlList,
             (url) => {
                 this.logger.info(`Executing GET request: ${url}`);
-                return request.getAsync(url).spread((response: any, body: any) => this.worldTradingDataMapper.mapResponseToDto(JSON.parse(body)));
+                const symbol = url.match(/symbol\=\w*/g)[0].split("=")[1];
+                return request.getAsync(url).spread((response: any, body: any) =>
+                    this.worldTradingDataMapper.mapResponseToDto(JSON.parse(body), symbol));
             }
         ).then((results: IWorldTradingDataResponseDto[]) => {
             return results;
         }).catch((err) => {
             this.logger.error(err);
-            throw new CommunicationError(500, MESSAGES.ERROR_GETTING_VALUES);
+            throw err;
         });
     }
 }

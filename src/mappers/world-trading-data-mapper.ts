@@ -1,5 +1,6 @@
 import moment from "moment";
 import { DATE_FORMAT, MESSAGES } from "../constants";
+import { ValidationError } from "../errors/validation-error";
 import { IPriceDto, PriceDto } from "../model/integration/price-dto";
 import { IWorldTradingDataResponseDto, WorldTradingDataResponseDto } from "../model/integration/world-trading-data-response-dto";
 import { IAssetDto } from "../model/portfolios/asset-dto";
@@ -13,8 +14,12 @@ import { MathUtils } from "../utils/math-utils";
 export class WorldTradingDataMapper {
     private readonly logger: Logger = LoggerFactory.create(WorldTradingDataMapper.name);
 
-    public mapResponseToDto(response: any): IWorldTradingDataResponseDto {
+    public mapResponseToDto(response: any, symbol: string): IWorldTradingDataResponseDto {
         this.logger.info(MESSAGES.MAPPING_RESPONSE);
+
+        if (response.Message !== null && response.Message !== undefined) {
+            throw new ValidationError(400, `Invalid symbol ticker: ${symbol}`);
+        }
 
         const responseDto = new WorldTradingDataResponseDto();
         responseDto.name = response.name;
